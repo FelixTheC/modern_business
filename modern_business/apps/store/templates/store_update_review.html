@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top:10px">
+        <div class="col-lg-offset-2 col-lg-8">
+            <h1>{{ book|title }} - Review</h1>
+            <form method="post" action=".">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-default" type="submit">Ändern</button>
+                <a class="btn btn-default" href="{% url 'store:book_main' %}">Zurück</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

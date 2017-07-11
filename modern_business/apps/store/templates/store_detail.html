@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load cms_tags sekizai_tags %}
+
+{% block content %}
+<div class="fluid-container">
+    <div class="row">
+        <div class="col-lg-offset-2 col-lg-8">
+
+        <h2>{{ object.title|title }} - {{ object.author }}</h2>
+        <p>{{ object.description }}</p>
+
+        <h3>Reviews</h3>
+        {% if review %}
+            {% for r in review %}
+                <h4>{{ r.text }}</h4>
+                <p>{{ r.user }} - {{ r.publish_date }}</p>
+                {% if r.user == request.user %}
+                    <a href="{{ r.get_update_url }}">Bearbeiten</a>
+                    <a href="{{ r.get_delete_url }}">Löschen</a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <h4>Make your own Review</h4>
+            <form method="post" action="{% url 'store:save_review' object.pk %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-default" type="submit">Submit</button>
+                <a class="btn btn-default" href="{% url 'store:book_main' %}">Zurück</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

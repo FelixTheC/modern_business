@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <form method="post" action=".">
+        {% csrf_token %}
+        <p>Are you sure you want delete the Review for <i>{{ review.book|title }}</i></p>
+        <button type="submit">Delete</button>
+    </form>
+
+<a href="{% url 'store:book_main' %}">Zurück</a>
+
+{% endblock %}

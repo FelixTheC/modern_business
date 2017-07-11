@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="fluid-container">
+    <div class="row" style="margin-top:10px">
+        <div class="col-lg-offset-2 col-lg-8">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>{{request.user}}'s-Cart</h2>
+        </div>
+        <div class="panel-body">
+            {% for book in order %}
+                <p>{{book.book}}</p>
+                <p>{{book.quantity}} x {{book.book.price}}</p>
+                <a href="{% url 'store:add_cart' book.book.pk %}">+</a>
+                <span> /</span>
+                <a href="{% url 'store:remove_cart' book.book.pk %}">-</a>
+            {% empty %}
+            <h2>There are no Books in cart</h2>
+            {% endfor %}
+        </div>
+        {% if total > 0 %}
+        <div class="panel-footer">
+            <p>Total: {{total}}</p>
+        </div>
+        {% endif %}
+        </div>
+        <a href="{% url 'store:book_main' %}" class="btn btn-default">Zurück</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

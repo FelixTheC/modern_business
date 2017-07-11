@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load cms_tags %}
+
+{% block content %}
+<div class="fluid-container">
+    <div class="row">
+        <div class="col-lg-offset-2 col-lg-8">
+            {% placeholder "content" %}
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px">
+    {% for item in object_list %}
+    <div class="col-lg-3">
+        <div class="thumbnail">
+            <img src="{{item.cover}}" >
+            <div class="caption">
+                <h3>{{ item.title|title }} - {{ item.author }}</h3>
+                <p><a href="{% url 'store:add_cart' item.pk %}">Add to Cart</a><span> -</span>
+                    <a href="{{ item.get_absolute_url }}">Details</a></p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load cms_tags %}
+
+{% block title %}{% page_attribute "page_title" %}{% endblock title %}
+
+    <!-- Content Row -->
+{% block content %}
+<div class="fluid-container">
+    <div class="row">
+        <div class="col-lg-offset-2 col-lg-8">
+            <ol class="breadcrumb">
+                {% block breadcrumb %}
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li class="active">
+                    Contact
+                </li>
+                {% endblock %}
+            </ol>
+        </div>
+        <!-- Map Column -->
+        <div class="col-lg-offset-2 col-lg-6">
+            <!-- Embedded Google Map -->
+            {% placeholder 'map' %}
+        </div>
+        <!-- Contact Details Column -->
+        <div class="col-lg-2 col-lg-pull-2 col-lg-offset-2">
+            <h3>Contact Details</h3>
+            {% placeholder 'contact_details' %}
+            <br>
+            <h3>Send us a Message</h3>
+            <form class="form" method="post" action=".">
+                {% csrf_token %}
+                <div class="form-group">
+                    <select class="form-control">
+                        <option>Support</option>
+                        <option>Anfrage</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Abschicken</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

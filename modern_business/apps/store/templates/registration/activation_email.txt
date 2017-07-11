@@ -1,0 +1,7 @@
+Greetings,
+
+You signed up for an account at {{ site.name }}
+
+http://{{site.domain}}{% url 'registration_activate' activation_key %}
+
+some other text {{expiration_days}}
